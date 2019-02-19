@@ -5,7 +5,7 @@ import shlex
 
 worker=set()        # All workers of the investigated swarm
 noworker=set()      # hosts that are not a worker
-mapping={}          # ip 2 id
+mapping={}          # Store the ips of the hosting systems
 
 
 def monitor():
