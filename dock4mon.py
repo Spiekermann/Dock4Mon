@@ -11,12 +11,14 @@ mapping={}          # Store the ips of the hosting systems
 # implement your own technique
 # in this poc, we use ssh-based iptables manipulation
 def capture(ip):
-    print "Capture for " + ip
+    ip = ip.lstrip()
+    print "Create capture process on host: " + ip
 
 
 # remove capture process
 # just remove the things you've done before
-def redo(ip):
+def undo(ip):
+    ip=ip.lstrip()
     print "Remove capture for " + ip
 
 # monitoring process
@@ -32,6 +34,7 @@ def monitor():
             if u[2] != "Drain":            # Manager without working thread
                 if u[0] not in worker:
                     worker.add(u[0])
+                    print len(worker)
                     inspect(u[0])
             else:
                 if u[0] not in noworker:
@@ -39,7 +42,7 @@ def monitor():
         else:   # Manager, check for worker capabilities
             if u[3] == "Down":  # Worker was in swarm, delete it from set
                 if u[0] in worker:
-                    redo(mapping[u[0]])
+                    undo(mapping[u[0]])
                   #  print "Please remove worker " + mapping[u[0]] + " from capture."
                     worker.remove(u[0])
                     print "Swarm has " + str(len(worker)) + " members"
@@ -56,10 +59,10 @@ def inspect(worker):
             if "Addr" in x:
                 if worker not in mapping:
                     print "New member of swarm found."
-                    capture(x.split(":")[1])
-                    print "Create capture process on host: " + x.split(":")[1]
-                    mapping[worker]=x.split(":")[1]
-                    print "Swarm has " + str(len(worker)) + " members"
+                    a,ip = x.split(":")
+                    capture(ip)
+                    mapping[worker]=ip
+                    print "Swarm has " + str(len(mapping)) + " members"
 
 
 if __name__ == "__main__":
