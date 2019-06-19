@@ -7,4 +7,4 @@ MonDock checks for the availability and the status of the workers and informs th
 Additionally MonDock extracts the ip-address of the host, which runs the worker.
 
 ## Installation
-No installation needed, just run `python mondock.py`
+No installation needed, just run `python mondock.py` on a docker swarm manager.
