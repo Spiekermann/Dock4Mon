@@ -15,6 +15,7 @@ def capture(ip):
     print "Create capture process on host: " + ip
 
 
+
 # remove capture process
 # just remove the things you've done before
 def undo(ip):
@@ -66,11 +67,11 @@ def inspect(worker):
 
 
 if __name__ == "__main__":
-    print "Starting Dock4Mon..."
+    print "Starting MonDock..."
     print "Press Ctrl-C to quit."
     try:
         while True:
             monitor()
     except (KeyboardInterrupt):
         print "Ctrl-C received..."
-        print "Quitting Dock4Mon"
+        print "Quitting MonDock"
